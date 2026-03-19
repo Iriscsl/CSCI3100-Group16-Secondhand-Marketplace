@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    action_text-trix (2.1.16)
+    action_text-trix (2.1.17)
       railties
     actioncable (8.1.2)
       actionpack (= 8.1.2)
@@ -187,11 +187,11 @@ GEM
       net-protocol
     net-ssh (7.3.0)
     nio4r (2.7.5)
-    nokogiri (1.19.0-arm64-darwin)
+    nokogiri (1.19.1-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.19.0-x64-mingw-ucrt)
+    nokogiri (1.19.1-x64-mingw-ucrt)
       racc (~> 1.4)
-    nokogiri (1.19.0-x86_64-linux-gnu)
+    nokogiri (1.19.1-x86_64-linux-gnu)
       racc (~> 1.4)
     ostruct (0.6.3)
     parallel (1.27.0)
@@ -368,6 +368,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  action_text-trix (>= 2.1.17)
   bootsnap
   brakeman (~> 8.0.4)
   bundler-audit
@@ -377,6 +378,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  nokogiri (>= 1.19.1)
   pg (~> 1.1)
   propshaft
   puma (>= 5.0)
