@@ -62,10 +62,10 @@ class ItemsController < ApplicationController
     new_status = params[:status]
     if @item.update(status: new_status)
       redirect_to @item, notice: "Status updated to #{new_status}."
-    else 
+    else
       redirect_to @item, alert: "Could not update status."
-    end 
-  end 
+    end
+  end
 
  private
     # Use callbacks to share common setup or constraints between actions.

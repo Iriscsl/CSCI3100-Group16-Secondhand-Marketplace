@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :items do 
+  resources :items do
     patch :update_status, on: :member
-  end 
-  
+  end
+
   get "home/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
