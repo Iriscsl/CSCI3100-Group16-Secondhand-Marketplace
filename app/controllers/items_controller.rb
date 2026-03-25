@@ -72,9 +72,10 @@ class ItemsController < ApplicationController
     def set_item
       @item = Item.find(params.expect(:id))
     end
-
-    # Only allow a list of trusted parameters through.
+    
     def item_params
-      params.expect(item: [ :title, :description, :price, :status ])
+      permitted = params.require(:item).permit(:title, :description, :price, :status, :community)
+      permitted[:community] = permitted[:community].to_i if permitted[:community]
+      permitted
     end
 end

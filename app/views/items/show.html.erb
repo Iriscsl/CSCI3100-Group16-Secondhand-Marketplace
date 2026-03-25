@@ -14,3 +14,5 @@
 <% elsif @item.reserved? %>
   <%= button_to "Mark as Sold", update_status_item_path(@item, status: :sold), method: :patch, class: "btn btn-success" %>
 <% end %>
+
+
