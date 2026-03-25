@@ -72,7 +72,7 @@ class ItemsController < ApplicationController
     def set_item
       @item = Item.find(params.expect(:id))
     end
-    
+
     def item_params
       permitted = params.require(:item).permit(:title, :description, :price, :status, :community)
       permitted[:community] = permitted[:community].to_i if permitted[:community]

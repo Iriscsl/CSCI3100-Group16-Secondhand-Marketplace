@@ -36,5 +36,4 @@ class Item < ApplicationRecord
   #   symbol = Item.communities.key(community)   # integer -> symbol, e.g., 2 -> :new_asia
   #   Item::COMMUNITY_NAMES[symbol]              # symbol -> full name
   # end
-
 end
