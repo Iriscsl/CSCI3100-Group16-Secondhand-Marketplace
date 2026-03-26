@@ -6,7 +6,7 @@ class Users::SessionsController < Devise::SessionsController
       end
     end
   end
-    
+
   def destroy
     super do |resource|
       flash[:notice] = "You have been signed out successfully."
