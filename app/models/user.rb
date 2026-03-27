@@ -22,5 +22,4 @@ class User < ApplicationRecord
       errors.add(:email, "must be a CUHK email address (1155xxxxxx@link.cuhk.edu.hk)")
     end
   end
-
 end
