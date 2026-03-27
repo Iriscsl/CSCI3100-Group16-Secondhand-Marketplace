@@ -123,6 +123,7 @@ GEM
       tzinfo
     ffi (1.17.3-arm64-darwin)
     ffi (1.17.3-x64-mingw-ucrt)
+    ffi (1.17.3-x86_64-darwin)
     ffi (1.17.3-x86_64-linux-gnu)
     fugit (1.12.1)
       et-orbi (~> 1.4)
@@ -198,6 +199,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.19.2-x64-mingw-ucrt)
       racc (~> 1.4)
+    nokogiri (1.19.2-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.19.2-x86_64-linux-gnu)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -208,6 +211,7 @@ GEM
       racc
     pg (1.6.3-arm64-darwin)
     pg (1.6.3-x64-mingw-ucrt)
+    pg (1.6.3-x86_64-darwin)
     pg (1.6.3-x86_64-linux)
     pp (0.6.3)
       prettyprint
@@ -344,6 +348,7 @@ GEM
     stringio (3.2.0)
     thor (1.5.0)
     thruster (0.1.18)
+    thruster (0.1.18-x86_64-darwin)
     thruster (0.1.18-x86_64-linux)
     timeout (0.6.0)
     tsort (0.2.0)
@@ -378,6 +383,7 @@ GEM
 PLATFORMS
   arm64-darwin-23
   x64-mingw-ucrt
+  x86_64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
