@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :user_community, class_name: "Community", foreign_key: "community", optional: true
-  has_many :items, foreign_key: "seller_id"
+  has_many :items, dependent: :destroy
   before_validation :strip_email_spaces
   private
 
