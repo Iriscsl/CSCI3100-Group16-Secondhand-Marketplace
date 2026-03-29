@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: %i[ show edit update destroy ]
+  before_action :set_item, only: %i[ show edit update destroy update_status ]
 
   # GET /items or /items.json
   def index
@@ -57,14 +57,25 @@ class ItemsController < ApplicationController
     end
   end
 
-  private
+  def update_status
+    @item = Item.find(params[:id])
+    new_status = params[:status]
+    if @item.update(status: new_status)
+      redirect_to @item, notice: "Status updated to #{new_status}."
+    else
+      redirect_to @item, alert: "Could not update status."
+    end
+  end
+
+ private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
     def item_params
-      params.expect(item: [ :title, :description, :price, :status ])
+      permitted = params.require(:item).permit(:title, :description, :price, :status, :community)
+      permitted[:community] = permitted[:community].to_i if permitted[:community]
+      permitted
     end
 end

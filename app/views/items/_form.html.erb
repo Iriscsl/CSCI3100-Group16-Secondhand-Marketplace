@@ -27,8 +27,13 @@
   </div>
 
   <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.number_field :status %>
+  <%= form.label :status, style: "display: block" %>
+  <%= form.select :status, Item.statuses.keys.map { |s| [s.to_s.humanize, s] } %>
+  </div>
+
+  <div>
+  <%= form.label :community, style: "display: block" %>
+  <%= form.select :community, Item.communities.map { |key, value| [Item::COMMUNITY_NAMES[key.to_sym], value] } %>
   </div>
 
   <div>

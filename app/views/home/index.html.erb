@@ -1,1 +1,7 @@
-<h1>Hello World#index</h1>
+<h1>Welcome to Second-hand Marketplace</h1>
+<p>A centralized trading platform for CUHK students</p>
+
+<% if user_signed_in? %>
+  <p>Hello, <%= current_user.name || current_user.email %>!</p>
+
+<% end %>
