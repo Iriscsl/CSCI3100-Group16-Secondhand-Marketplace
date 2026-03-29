@@ -15,4 +15,12 @@
   <%= button_to "Mark as Sold", update_status_item_path(@item, status: :sold), method: :patch, class: "btn btn-success" %>
 <% end %>
 
+<% if user_signed_in? && current_user != @item.user %>
+  <%= button_to "Message seller",
+      conversations_path(
+        item_id: @item.id,
+        seller_id: @item.user.id
+      ),
+      method: :post %>
+<% end %>
 

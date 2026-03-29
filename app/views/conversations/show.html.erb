@@ -1,2 +1,39 @@
 <h1>Conversations#show</h1>
-<p>Find me in app/views/conversations/show.html.erb</p>
+# <p>Find me in app/views/conversations/show.html.erb</p>
+
+<p>
+  Item:
+  <%= @conversation.item.name if @conversation.item.present? %>
+</p>
+
+
+<div class="messages">
+  <% @messages.each do |message| %>
+    <div class="message" style="margin-bottom: 12px; padding: 8px; border: 1px solid #ccc;">
+      <p>
+        <strong>
+          <%= message.sender.email %>
+        </strong>
+      </p>
+
+      <p><%= message.content %></p>
+
+      <small><%= message.created_at.strftime("%Y-%m-%d %H:%M") %></small>
+    </div>
+  <% end %>
+</div>
+
+<hr>
+
+<h2>Send a message</h2>
+
+<%= form_with model: [@conversation, @message], local: true do |f| %>
+  <div>
+    <%= f.label :content, "Message" %><br>
+    <%= f.text_area :content, rows: 4 %>
+  </div>
+
+  <div style="margin-top: 10px;">
+    <%= f.submit "Send" %>
+  </div>
+<% end %>
