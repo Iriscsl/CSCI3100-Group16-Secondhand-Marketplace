@@ -15,6 +15,15 @@
   </div>
 
   <div>
+    <%= label_tag :community, "Filter by community" %>
+    <%= select_tag :community,
+        options_for_select(
+          [["All", ""], *Item::COMMUNITY_NAMES.map { |k, v| [v, k] }],
+          params[:community]
+        ) %>
+  </div>
+
+  <div>
     <%= label_tag :min_price, "Min price" %>
     <%= number_field_tag :min_price, params[:min_price].presence %>
   </div>
