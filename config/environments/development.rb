@@ -37,10 +37,18 @@ Rails.application.configure do
   # Make template changes take effect immediately.
   config.action_mailer.perform_caching = false
 
+  # Use Gmail SMTP if credentials are set, otherwise letter_opener for local preview
+  if ENV["GMAIL_USERNAME"].present?
+    config.action_mailer.delivery_method = :smtp
+  else
+    config.action_mailer.delivery_method = :letter_opener
+  end
+  config.action_mailer.perform_deliveries = true
+
   # Allow any host in development(trying to)
   config.hosts.clear
   # Set localhost to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000, protocol: "https" }
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000, protocol: "http" }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
