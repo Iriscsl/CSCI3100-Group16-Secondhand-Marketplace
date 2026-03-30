@@ -41,4 +41,15 @@ class Item < ApplicationRecord
     return all if status.blank?
     where(status: statuses[status])
   }
+
+  scope :min_price, ->(min) {
+    return all if min.blank?
+    where("price >= ?", min)
+  }
+
+  scope :max_price, ->(max) {
+    return all if max.blank?
+    where("price <= ?", max)
+  }
+  
 end
