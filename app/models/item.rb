@@ -51,5 +51,4 @@ class Item < ApplicationRecord
     return all if max.blank?
     where("price <= ?", max)
   }
-  
 end
