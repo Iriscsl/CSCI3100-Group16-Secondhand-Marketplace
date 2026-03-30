@@ -36,4 +36,9 @@ class Item < ApplicationRecord
   #   symbol = Item.communities.key(community)   # integer -> symbol, e.g., 2 -> :new_asia
   #   Item::COMMUNITY_NAMES[symbol]              # symbol -> full name
   # end
+
+  scope :with_status, ->(status) {
+    return all if status.blank?
+    where(status: statuses[status])
+  }
 end

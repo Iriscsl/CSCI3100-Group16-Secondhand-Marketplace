@@ -4,6 +4,22 @@
 
 <h1>Items</h1>
 
+<%= form_with url: items_path, method: :get, local: true do %>
+  <div>
+    <%= label_tag :status, "Filter by status" %>
+
+    <%= select_tag :status,
+        options_for_select(
+          [["All", ""], ["Available", "available"], ["Reserved", "reserved"], ["Sold", "sold"]],
+          params[:status]
+        ) %>
+  </div>
+
+  <%= submit_tag "Filter" %>
+<% end %>
+
+<hr>
+
 <div id="items">
   <% @items.each do |item| %>
     <%= render item %>
