@@ -1,0 +1,18 @@
+Hi <%= @user.name || @user.email %>,
+
+Here are the new items listed on the CUHK Marketplace in the last 24 hours:
+
+<% @new_items.each do |item| %>
+- <%= item.title %> ($<%= item.price %> HKD)
+  <%= truncate(item.description, length: 80) %>
+  Community: <%= item.community_name %>
+  Posted by: <%= item.user.name || item.user.email %>
+  View: <%= item_url(item) %>
+
+<% end %>
+Total new items today: <%= @new_items.size %>
+
+Browse all items: <%= items_url %>
+
+---
+You are receiving this because you are a registered user of the CUHK Secondhand Marketplace.
