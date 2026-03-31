@@ -3,8 +3,11 @@ class ConversationsController < ApplicationController
   before_action :set_conversation, only: [:show]
 
   def index
-    @conversations = Conversation.where("buyer_id = ? OR seller_id = ?", current_user.id, current_user.id)
-                                 .order(updated_at: :desc)
+    @conversations = Conversation
+    .where(buyer:current_user)
+    .or(Conversation.where(seller: current_user))
+    .includes(:buyer, :seller, :item, :messages)
+    .order(updated_at: :desc)
   end
 
   def show

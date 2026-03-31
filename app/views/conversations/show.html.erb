@@ -1,9 +1,8 @@
-<h1>Conversations#show</h1>
-# <p>Find me in app/views/conversations/show.html.erb</p>
+<h1>Conversations</h1>
 
 <p>
   Item:
-  <%= @conversation.item.name if @conversation.item.present? %>
+  <%= @conversation.item.title if @conversation.item.present? %>
 </p>
 
 
@@ -12,11 +11,11 @@
     <div class="message" style="margin-bottom: 12px; padding: 8px; border: 1px solid #ccc;">
       <p>
         <strong>
-          <%= message.sender.email %>
+          <%= message.sender.name %>
         </strong>
       </p>
 
-      <p><%= message.content %></p>
+      <p><%= message.body %></p>
 
       <small><%= message.created_at.strftime("%Y-%m-%d %H:%M") %></small>
     </div>
@@ -29,8 +28,8 @@
 
 <%= form_with model: [@conversation, @message], local: true do |f| %>
   <div>
-    <%= f.label :content, "Message" %><br>
-    <%= f.text_area :content, rows: 4 %>
+    <%= f.label :body, "Message" %><br>
+    <%= f.text_area :body, rows: 4 %>
   </div>
 
   <div style="margin-top: 10px;">

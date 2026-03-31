@@ -19,7 +19,7 @@
   <%= button_to "Message seller",
       conversations_path(
         item_id: @item.id,
-        seller_id: @item.user.id
+        seller_id: @item.user
       ),
       method: :post %>
 <% end %>
