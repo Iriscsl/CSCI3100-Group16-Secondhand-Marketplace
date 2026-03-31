@@ -8,26 +8,49 @@ See `.ruby-version`
 
 ## System Dependencies
 
-- PostgreSQL
+- Ruby (see `.ruby-version`)
+- PostgreSQL (hosted on [Supabase](https://supabase.com))
 - Node.js (for assets)
 
 ## Configuration
 
 1. Copy environment variables:
    ```bash
-   cp .env.example .env
+   cp .env.example .env.development
    ```
-2. Set the following in `.env` (optional, for email delivery):
+2. Fill in the Supabase database credentials (from **Supabase Dashboard → Project Settings → Database → Connection string**, use the **Session/Transaction mode pooler**):
+   - `DATABASE_HOST` — pooler host, e.g. `aws-0-ap-southeast-1.pooler.supabase.com`
+   - `DATABASE_PORT` — `6543`
+   - `DATABASE_NAME` — `postgres`
+   - `DATABASE_USERNAME` — `postgres.YOUR_PROJECT_REF`
+   - `DATABASE_PASSWORD` — your Supabase database password
+   - `DATABASE_SSLMODE` — `require`
+   - `DATABASE_PREPARED_STATEMENTS` — `false`
+
+3. Set the following for email delivery (optional):
    - `GMAIL_USERNAME` — your Gmail address
    - `GMAIL_APP_PASSWORD` — a Gmail App Password
 
    If these are not set, emails will open in the browser via `letter_opener` in development.
 
+4. Set the following for Stripe (optional):
+   - `STRIPE_SECRET_KEY`
+   - `STRIPE_PUBLISHABLE_KEY`
+
 ## Database Setup
 
 ```bash
-bin/rails db:create db:migrate db:seed
+bin/rails db:migrate db:seed
 ```
+
+### Seed Data
+
+Running `db:seed` creates two pre-confirmed users and sample items:
+
+| Email | Password | Name |
+|---|---|---|
+| `1155000001@link.cuhk.edu.hk` | `password123` | Alice Chan |
+| `1155000002@link.cuhk.edu.hk` | `password123` | Bob Wong |
 
 ## Running the App
 
