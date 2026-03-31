@@ -6,16 +6,16 @@
 
 <%= form_with url: items_path, method: :get, local: true do %>
   <div>
-    <%= label_tag :status, "Filter by status" %>
-    <%= select_tag :status,
-        options_for_select(
-          [["All", ""], ["Available", "available"], ["Reserved", "reserved"], ["Sold", "sold"]],
-          params[:status]
-        ) %>
+    <strong>Filter by status:</strong><br>
+
+    <% ["available", "reserved", "sold"].each do |s| %>
+      <%= check_box_tag "status[]", s, params[:status].nil? || params[:status].include?(s) %>
+      <%= label_tag s, s.capitalize %><br>
+    <% end %>
   </div>
 
   <div>
-    <%= label_tag :community, "Filter by community" %>
+    <strong><%= label_tag :community, "Filter by community" %></strong>
     <%= select_tag :community,
         options_for_select(
           [["All", ""], *Item::COMMUNITY_NAMES.map { |k, v| [v, k] }],
@@ -24,6 +24,7 @@
   </div>
 
   <div>
+    <strong>Filter by price range:</strong><br>
     <%= label_tag :min_price, "Min price" %>
     <%= number_field_tag :min_price, params[:min_price].presence %>
   </div>

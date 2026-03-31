@@ -37,10 +37,14 @@ class Item < ApplicationRecord
   #   Item::COMMUNITY_NAMES[symbol]              # symbol -> full name
   # end
 
-  scope :with_status, ->(status) {
-    return all if status.blank?
-    where(status: statuses[status])
+  scope :with_statuses, ->(statuses) {
+    return all if statuses.blank?
+    where(status: statuses.map { |s| statuses_map[s] })
   }
+
+  def self.statuses_map
+    statuses
+  end
 
   scope :min_price, ->(min) {
     return all if min.blank?
