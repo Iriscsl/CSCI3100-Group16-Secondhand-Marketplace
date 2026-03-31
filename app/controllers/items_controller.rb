@@ -5,10 +5,10 @@ class ItemsController < ApplicationController
   def index
     min = params[:min_price].presence
     max = params[:max_price].presence
-    status = params[:status].presence
+    statuses = params[:status].presence
     community = params[:community].presence
 
-    @items = Item.with_status(status)
+    @items = Item.with_statuses(statuses)
                   .min_price(min)
                   .max_price(max)
                   .with_community(community)
