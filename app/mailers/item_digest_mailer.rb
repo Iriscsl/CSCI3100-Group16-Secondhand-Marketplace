@@ -1,5 +1,5 @@
 class ItemDigestMailer < ApplicationMailer
-  default from: "fakeccy01@gmail.com"
+  default from: "csci3100gp16team@gmail.com"
 
   def daily_digest(user)
     @user = user
