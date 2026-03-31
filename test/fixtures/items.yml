@@ -1,13 +1,30 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# one:
+#   title: MyString
+#   description: MyText
+#   price: 1
+#   status: 1
+
+# two:
+#   title: MyString
+#   description: MyText
+#   price: 1
+#   status: 1
+
 one:
   title: MyString
   description: MyText
   price: 1
   status: 1
+  community: 0
+  user: one
 
 two:
   title: MyString
   description: MyText
   price: 1
   status: 1
+  community: 0
+  user: one
+  

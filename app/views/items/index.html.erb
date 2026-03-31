@@ -4,6 +4,31 @@
 
 <h1>Items</h1>
 
+<%= form_with url: items_path, method: :get, local: true do %>
+  <div>
+    <%= label_tag :status, "Filter by status" %>
+    <%= select_tag :status,
+        options_for_select(
+          [["All", ""], ["Available", "available"], ["Reserved", "reserved"], ["Sold", "sold"]],
+          params[:status]
+        ) %>
+  </div>
+
+  <div>
+    <%= label_tag :min_price, "Min price" %>
+    <%= number_field_tag :min_price, params[:min_price].presence %>
+  </div>
+
+  <div>
+    <%= label_tag :max_price, "Max price" %>
+    <%= number_field_tag :max_price, params[:max_price].presence %>
+  </div>
+
+  <%= submit_tag "Filter" %>
+<% end %>
+
+<hr>
+
 <div id="items">
   <% @items.each do |item| %>
     <%= render item %>

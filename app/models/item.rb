@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  # belongs_to :user
+  belongs_to :user
   enum :status, [ :available, :reserved, :sold ]
 
   enum :community, {
@@ -36,4 +36,19 @@ class Item < ApplicationRecord
   #   symbol = Item.communities.key(community)   # integer -> symbol, e.g., 2 -> :new_asia
   #   Item::COMMUNITY_NAMES[symbol]              # symbol -> full name
   # end
+
+  scope :with_status, ->(status) {
+    return all if status.blank?
+    where(status: statuses[status])
+  }
+
+  scope :min_price, ->(min) {
+    return all if min.blank?
+    where("price >= ?", min)
+  }
+
+  scope :max_price, ->(max) {
+    return all if max.blank?
+    where("price <= ?", max)
+  }
 end

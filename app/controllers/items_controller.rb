@@ -3,7 +3,13 @@ class ItemsController < ApplicationController
 
   # GET /items or /items.json
   def index
-    @items = Item.all
+    min = params[:min_price].presence
+    max = params[:max_price].presence
+    status = params[:status].presence
+
+    @items = Item.with_status(status)
+                  .min_price(min)
+                  .max_price(max)
   end
 
   # GET /items/1 or /items/1.json
@@ -21,7 +27,7 @@ class ItemsController < ApplicationController
 
   # POST /items or /items.json
   def create
-    @item = Item.new(item_params)
+    @item = current_user.items.build(item_params)
 
     respond_to do |format|
       if @item.save
