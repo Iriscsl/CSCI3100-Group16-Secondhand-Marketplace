@@ -36,4 +36,28 @@ class Item < ApplicationRecord
   #   symbol = Item.communities.key(community)   # integer -> symbol, e.g., 2 -> :new_asia
   #   Item::COMMUNITY_NAMES[symbol]              # symbol -> full name
   # end
+
+  scope :with_statuses, ->(statuses) {
+    return all if statuses.blank?
+    where(status: statuses.map { |s| statuses_map[s] })
+  }
+
+  def self.statuses_map
+    statuses
+  end
+
+  scope :min_price, ->(min) {
+    return all if min.blank?
+    where("price >= ?", min)
+  }
+
+  scope :max_price, ->(max) {
+    return all if max.blank?
+    where("price <= ?", max)
+  }
+
+  scope :with_community, ->(community) {
+    return all if community.blank?
+    where(community: communities[community])
+  }
 end

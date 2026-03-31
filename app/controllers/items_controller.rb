@@ -3,7 +3,15 @@ class ItemsController < ApplicationController
 
   # GET /items or /items.json
   def index
-    @items = Item.all
+    min = params[:min_price].presence
+    max = params[:max_price].presence
+    statuses = params[:status].presence
+    community = params[:community].presence
+
+    @items = Item.with_statuses(statuses)
+                  .min_price(min)
+                  .max_price(max)
+                  .with_community(community)
   end
 
   # GET /items/1 or /items/1.json
