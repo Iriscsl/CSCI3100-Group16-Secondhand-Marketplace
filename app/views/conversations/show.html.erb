@@ -5,28 +5,16 @@
   <%= @conversation.item.title if @conversation.item.present? %>
 </p>
 
-
-<div class="messages">
-  <% @messages.each do |message| %>
-    <div class="message" style="margin-bottom: 12px; padding: 8px; border: 1px solid #ccc;">
-      <p>
-        <strong>
-          <%= message.sender.name %>
-        </strong>
-      </p>
-
-      <p><%= message.body %></p>
-
-      <small><%= message.created_at.strftime("%Y-%m-%d %H:%M") %></small>
-    </div>
-  <% end %>
+<%= turbo_stream_from @conversation %>
+<div id="messages">
+  <%= render @messages %>
 </div>
 
 <hr>
 
 <h2>Send a message</h2>
 
-<%= form_with model: [@conversation, @message], local: true do |f| %>
+<%= form_with model: [@conversation, @message] do |f| %>
   <div>
     <%= f.label :body, "Message" %><br>
     <%= f.text_area :body, rows: 4 %>
