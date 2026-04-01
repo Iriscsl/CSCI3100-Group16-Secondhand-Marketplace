@@ -8,7 +8,10 @@ class MessagesController < ApplicationController
     @message.sender = current_user 
 
     if @message.save 
-      redirect_to conversation_path(@conversation), notice: "Message sent." 
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to conversation_path(@conversation), notice: "Message sent." }
+      end 
     else 
       @messages = @conversation.messages.order(:created_at) 
       render "conversations/show", status: :unprocessable_entity 

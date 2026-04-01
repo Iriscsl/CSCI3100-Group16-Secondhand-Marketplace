@@ -14,13 +14,6 @@
 
 <h2>Send a message</h2>
 
-<%= form_with model: [@conversation, @message] do |f| %>
-  <div>
-    <%= f.label :body, "Message" %><br>
-    <%= f.text_area :body, rows: 4 %>
-  </div>
-
-  <div style="margin-top: 10px;">
-    <%= f.submit "Send" %>
-  </div>
-<% end %>
+<div id="new_message_form">
+  <%= render "messages/form", conversation: @conversation, message: @message %>
+</div>
