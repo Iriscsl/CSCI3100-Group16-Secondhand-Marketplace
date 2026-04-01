@@ -1,6 +1,7 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_conversation, only: [:show]
+  before_action :authorize_participant!, only: [:show] 
 
   def index
     @conversations = Conversation
@@ -29,5 +30,10 @@ class ConversationsController < ApplicationController
 
   def set_conversation
     @conversation = Conversation.find(params[:id])
+  end
+  def authorize_participant!
+    unless current_user == @conversation.buyer || current_user == @conversation.seller
+      redirect_to conversations_path, alert: "You are not allowed to view this conversation."
+    end
   end
 end
