@@ -55,4 +55,9 @@ class Item < ApplicationRecord
     return all if max.blank?
     where("price <= ?", max)
   }
+
+  scope :with_community, ->(community) {
+    return all if community.blank?
+    where(community: communities[community])
+  }
 end
