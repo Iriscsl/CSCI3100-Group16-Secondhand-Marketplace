@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   # belongs_to :user
   include PgSearch::Model
-  enum :status, [ :available, :reserved, :sold ]
+  enum :status, [:available, :reserved, :sold]
 
   enum :community, {
     chung_chi: 0,
