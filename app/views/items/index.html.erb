@@ -5,6 +5,11 @@
 <h1>Items</h1>
 
 <%= form_with url: items_path, method: :get, local: true do %>
+  <div style="margin-bottom: 16px;">
+    <strong>Search</strong><br>
+    <%= text_field_tag :query, params[:query], placeholder: "Search items..." %>
+  </div>
+  
   <div>
     <strong>Filter by status:</strong><br>
 
@@ -34,7 +39,9 @@
     <%= number_field_tag :max_price, params[:max_price].presence %>
   </div>
 
-  <%= submit_tag "Filter" %>
+  <div style="margin-top: 12px;">
+    <%= submit_tag "Apply Search & Filters" %>
+  </div>
 <% end %>
 
 <hr>

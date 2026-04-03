@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
+  include PgSearch::Model
   enum :status, [ :available, :reserved, :sold ]
 
   enum :community, {
@@ -60,4 +61,12 @@ class Item < ApplicationRecord
     return all if community.blank?
     where(community: communities[community])
   }
+
+  pg_search_scope :search_items,
+    against: [:title, :description],
+    using: {
+      trigram: {
+        threshold: 0.2
+      }
+    }
 end
