@@ -1,7 +1,12 @@
 require "test_helper"
 
 class ItemsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
+    @user = users(:one)   # use the fixture user
+    sign_in @user
+
     @item = items(:one)
   end
 
@@ -17,7 +22,8 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create item" do
     assert_difference("Item.count") do
-      post items_url, params: { item: { description: @item.description, price: @item.price, status: @item.status, title: @item.title } }
+      # post items_url, params: { item: { description: @item.description, price: @item.price, status: @item.status, title: @item.title } }
+      post items_url, params: { item: { description: @item.description, price: @item.price, status: @item.status, title: @item.title, community: @item.community } }
     end
 
     assert_redirected_to item_url(Item.last)
@@ -34,7 +40,8 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update item" do
-    patch item_url(@item), params: { item: { description: @item.description, price: @item.price, status: @item.status, title: @item.title } }
+    # patch item_url(@item), params: { item: { description: @item.description, price: @item.price, status: @item.status, title: @item.title } }
+    patch item_url(@item), params: { item: { description: @item.description, price: @item.price, status: @item.status, title: @item.title, community: @item.community } }
     assert_redirected_to item_url(@item)
   end
 
