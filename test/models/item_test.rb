@@ -44,12 +44,12 @@ class ItemTest < ActiveSupport::TestCase
   end
 
   test "with_statuses filters by single status" do
-    results = Item.with_statuses(["available"])
+    results = Item.with_statuses([ "available" ])
     assert results.all?(&:available?)
   end
 
   test "with_statuses filters by multiple statuses" do
-    results = Item.with_statuses(["available", "reserved"])
+    results = Item.with_statuses([ "available", "reserved" ])
     results.each do |item|
       assert item.available? || item.reserved?
     end

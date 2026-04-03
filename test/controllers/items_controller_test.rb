@@ -83,7 +83,7 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "index filters by status" do
-    get items_url, params: { status: ["available"] }
+    get items_url, params: { status: [ "available" ] }
     assert_response :success
   end
 
@@ -93,7 +93,7 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "index with combined filters" do
-    get items_url, params: { min_price: 50, max_price: 200, status: ["available"], community: "chung_chi" }
+    get items_url, params: { min_price: 50, max_price: 200, status: [ "available" ], community: "chung_chi" }
     assert_response :success
   end
 end
