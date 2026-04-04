@@ -76,3 +76,4 @@ end
 gem "devise", "~> 5.0"
 gem "whenever", require: false
 gem "stripe"
+gem "pg_search", "~> 2.0"
