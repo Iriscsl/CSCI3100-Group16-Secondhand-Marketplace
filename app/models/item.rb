@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   # belongs_to :user
   include PgSearch::Model
-  enum :status, [:available, :reserved, :sold]
+  enum :status, [ :available, :reserved, :sold ]
 
   enum :community, {
     chung_chi: 0,
@@ -63,7 +63,7 @@ class Item < ApplicationRecord
   }
 
   pg_search_scope :search_items,
-    against: [:title, :description],
+    against: [ :title, :description ],
     using: {
       trigram: {
         threshold: 0.2
