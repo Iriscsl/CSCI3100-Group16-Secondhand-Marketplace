@@ -62,5 +62,31 @@ class ConversationsControllerTest < ActionDispatch::IntegrationTest
         seller_id: seller.id 
       }
     end
+  end 
+
+  test "should not create conversation when seller is not item owner" do
+    sign_in users(:two)
+
+    item = items(:one)
+    wrong_seller = users(:three)
+
+    assert_no_difference("Conversation.count") do
+      post conversations_url, params: {
+        item_id: item.id,
+        seller_id: wrong_seller.id
+      }
+    end 
+
+    assert_redirected_to items_url 
+    assert_match "must be the owner of the item", flash[:alert]
+  end 
+
+  test "index shows only conversations for current user" do 
+    sign_in users(:two) 
+    get conversations_url 
+
+    assert_response :success 
+    assigns_conversations = assigns(:conversations) 
+    assert assigns_conversations.all? { |c| c.buyer == users(:two) || c.seller == users(:two) } 
   end
 end
