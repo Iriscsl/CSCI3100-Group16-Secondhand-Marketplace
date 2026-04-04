@@ -4,7 +4,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
-    @conversation = conversations(:one)        
+    @conversation = conversations(:one)
     @participant  = users(:two)
     @other_user   = users(:three)
   end

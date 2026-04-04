@@ -22,7 +22,7 @@ class ConversationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show conversation for participant" do
-    sign_in @buyer           
+    sign_in @buyer
     get conversation_url(@conversation)
     assert_response :success
   end
@@ -35,34 +35,34 @@ class ConversationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not create duplicate conversation" do
-    sign_in users(:two) 
+    sign_in users(:two)
 
-    item = items(:one) 
-    seller = item.user 
+    item = items(:one)
+    seller = item.user
 
     assert_no_difference("Conversation.count") do
       post conversations_url, params: {
         item_id:   item.id,
-        seller_id: seller.id      
+        seller_id: seller.id
       }
     end
 
     assert_redirected_to conversation_url(conversations(:one))
   end
 
-  test "should create new conversation" do 
-    sign_in users(:three) 
+  test "should create new conversation" do
+    sign_in users(:three)
 
-    item = items(:one) 
-    seller = item.user 
+    item = items(:one)
+    seller = item.user
 
-    assert_difference("Conversation.count", 1) do 
+    assert_difference("Conversation.count", 1) do
       post conversations_url, params: {
-        item_id: item.id, 
-        seller_id: seller.id 
+        item_id: item.id,
+        seller_id: seller.id
       }
     end
-  end 
+  end
 
   test "should not create conversation when seller is not item owner" do
     sign_in users(:two)
@@ -75,18 +75,18 @@ class ConversationsControllerTest < ActionDispatch::IntegrationTest
         item_id: item.id,
         seller_id: wrong_seller.id
       }
-    end 
+    end
 
-    assert_redirected_to items_url 
+    assert_redirected_to items_url
     assert_match "must be the owner of the item", flash[:alert]
-  end 
+  end
 
-  test "index shows only conversations for current user" do 
-    sign_in users(:two) 
-    get conversations_url 
+  test "index shows only conversations for current user" do
+    sign_in users(:two)
+    get conversations_url
 
-    assert_response :success 
-    assigns_conversations = assigns(:conversations) 
-    assert assigns_conversations.all? { |c| c.buyer == users(:two) || c.seller == users(:two) } 
+    assert_response :success
+    assigns_conversations = assigns(:conversations)
+    assert assigns_conversations.all? { |c| c.buyer == users(:two) || c.seller == users(:two) }
   end
 end

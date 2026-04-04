@@ -21,13 +21,13 @@ class ConversationsController < ApplicationController
       item_id: params[:item_id],
       buyer_id: current_user.id,
       seller_id: params[:seller_id]
-    ) 
+    )
 
-    if @conversation.save 
-      redirect_to conversation_path(@conversation) 
-    else 
-      redirect_to items_path, alert: @conversation.errors.full_messages.to_sentence 
-    end 
+    if @conversation.save
+      redirect_to conversation_path(@conversation)
+    else
+      redirect_to items_path, alert: @conversation.errors.full_messages.to_sentence
+    end
   end
 
   private

@@ -1,5 +1,5 @@
 class AddChatForeignKeys < ActiveRecord::Migration[8.1]
-  def change 
+  def change
     # Indexes for performance
     add_index :conversations, :item_id
     add_index :conversations, :buyer_id

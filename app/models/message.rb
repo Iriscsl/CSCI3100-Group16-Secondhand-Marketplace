@@ -3,10 +3,10 @@ class Message < ApplicationRecord
   belongs_to :sender, class_name: "User"
 
   validates :body, presence: true
-  after_create_commit :broadcast_message 
+  after_create_commit :broadcast_message
 
-  private 
-  
+  private
+
   def broadcast_message
     broadcast_append_to(
       conversation,
