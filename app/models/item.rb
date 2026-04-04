@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
+  has_many :conversations, dependent: :destroy
   enum :status, [ :available, :reserved, :sold ]
 
   enum :community, {
