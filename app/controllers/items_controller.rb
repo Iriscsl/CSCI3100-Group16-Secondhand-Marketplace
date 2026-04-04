@@ -11,10 +11,10 @@ class ItemsController < ApplicationController
 
     @items = Item.all
     @items = @items.search_items(query) if query.present?
-    @items = @items.with_statuses(statuses)
-    @items = @items.min_price(min)
-    @items = @items.max_price(max)
-    @items = @items.with_community(community)
+    @items = @items.with_statuses(statuses) if statuses.present?
+    @items = @items.with_community(community) if community.present?
+    @items = @items.min_price(min) if min.present?
+    @items = @items.max_price(max) if max.present?
   end
 
   # GET /items/1 or /items/1.json

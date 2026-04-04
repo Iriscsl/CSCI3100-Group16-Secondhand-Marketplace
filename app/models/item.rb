@@ -63,7 +63,7 @@ class Item < ApplicationRecord
   }
 
   pg_search_scope :search_items,
-    against: [:title, :description],
+    against: [ :title, :description ],
     using: {
       trigram: {
         threshold: 0.2
