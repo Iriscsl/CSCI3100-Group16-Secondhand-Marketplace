@@ -1,11 +1,11 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_conversation, only: [:show]
-  before_action :authorize_participant!, only: [:show] 
+  before_action :set_conversation, only: [ :show ]
+  before_action :authorize_participant!, only: [ :show ]
 
   def index
     @conversations = Conversation
-    .where(buyer:current_user)
+    .where(buyer: current_user)
     .or(Conversation.where(seller: current_user))
     .includes(:buyer, :seller, :item, :messages)
     .order(updated_at: :desc)

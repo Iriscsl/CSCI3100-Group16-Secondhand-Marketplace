@@ -27,3 +27,10 @@ two:
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
+
+three: 
+  email: "1155333333@cuhk.edu.hk"
+  name: "Test User three"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
