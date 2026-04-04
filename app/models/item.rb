@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  # belongs_to :user
+  belongs_to :user
   include PgSearch::Model
   enum :status, [ :available, :reserved, :sold ]
 
