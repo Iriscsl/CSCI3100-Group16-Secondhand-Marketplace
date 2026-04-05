@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_many :conversations, dependent: :destroy
+  include PgSearch::Model
   enum :status, [ :available, :reserved, :sold ]
 
   enum :community, {
@@ -38,10 +39,14 @@ class Item < ApplicationRecord
   #   Item::COMMUNITY_NAMES[symbol]              # symbol -> full name
   # end
 
-  scope :with_status, ->(status) {
-    return all if status.blank?
-    where(status: statuses[status])
+  scope :with_statuses, ->(statuses) {
+    return all if statuses.blank?
+    where(status: statuses.map { |s| statuses_map[s] })
   }
+
+  def self.statuses_map
+    statuses
+  end
 
   scope :min_price, ->(min) {
     return all if min.blank?
@@ -52,4 +57,17 @@ class Item < ApplicationRecord
     return all if max.blank?
     where("price <= ?", max)
   }
+
+  scope :with_community, ->(community) {
+    return all if community.blank?
+    where(community: communities[community])
+  }
+
+  pg_search_scope :search_items,
+    against: [ :title, :description ],
+    using: {
+      trigram: {
+        threshold: 0.2
+      }
+    }
 end

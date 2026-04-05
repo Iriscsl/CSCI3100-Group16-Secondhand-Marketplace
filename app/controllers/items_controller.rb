@@ -3,13 +3,18 @@ class ItemsController < ApplicationController
 
   # GET /items or /items.json
   def index
+    query = params[:query].presence
     min = params[:min_price].presence
     max = params[:max_price].presence
-    status = params[:status].presence
+    statuses = params[:status].presence
+    community = params[:community].presence
 
-    @items = Item.with_status(status)
-                  .min_price(min)
-                  .max_price(max)
+    @items = Item.all
+    @items = @items.search_items(query) if query.present?
+    @items = @items.with_statuses(statuses) if statuses.present?
+    @items = @items.with_community(community) if community.present?
+    @items = @items.min_price(min) if min.present?
+    @items = @items.max_price(max) if max.present?
   end
 
   # GET /items/1 or /items/1.json

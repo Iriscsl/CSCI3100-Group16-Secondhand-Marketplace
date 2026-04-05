@@ -5,16 +5,31 @@
 <h1>Items</h1>
 
 <%= form_with url: items_path, method: :get, local: true do %>
+  <div style="margin-bottom: 16px;">
+    <strong>Search</strong><br>
+    <%= text_field_tag :query, params[:query], placeholder: "Search items..." %>
+  </div>
+  
   <div>
-    <%= label_tag :status, "Filter by status" %>
-    <%= select_tag :status,
+    <strong>Filter by status:</strong><br>
+
+    <% ["available", "reserved", "sold"].each do |s| %>
+      <%= check_box_tag "status[]", s, params[:status].nil? || params[:status].include?(s) %>
+      <%= label_tag s, s.capitalize %><br>
+    <% end %>
+  </div>
+
+  <div>
+    <strong><%= label_tag :community, "Filter by community" %></strong>
+    <%= select_tag :community,
         options_for_select(
-          [["All", ""], ["Available", "available"], ["Reserved", "reserved"], ["Sold", "sold"]],
-          params[:status]
+          [["All", ""], *Item::COMMUNITY_NAMES.map { |k, v| [v, k] }],
+          params[:community]
         ) %>
   </div>
 
   <div>
+    <strong>Filter by price range:</strong><br>
     <%= label_tag :min_price, "Min price" %>
     <%= number_field_tag :min_price, params[:min_price].presence %>
   </div>
@@ -23,8 +38,10 @@
     <%= label_tag :max_price, "Max price" %>
     <%= number_field_tag :max_price, params[:max_price].presence %>
   </div>
-
-  <%= submit_tag "Filter" %>
+  
+  <div style="margin-top: 16px;">
+    <%= submit_tag "Apply Search & Filters" %>
+  </div>
 <% end %>
 
 <hr>
