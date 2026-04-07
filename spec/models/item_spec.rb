@@ -32,7 +32,7 @@ RSpec.describe Item, type: :model do
     end
 
     it "filters by status" do
-      result = Item.with_statuses(["available"])
+      result = Item.with_statuses([ "available" ])
       expect(result).to include(item1)
       expect(result).not_to include(item2)
     end
