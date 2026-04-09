@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :items, dependent: :destroy
   before_validation :strip_email_spaces
   validate :cuhk_email_format
+  validates :name, presence: true
+  # validates :password, length: { in: 6..128 }, if: -> { password.present? }
   private
 
   def name_required?
