@@ -48,16 +48,16 @@ RSpec.describe "Checkouts", type: :request do
 
         expect(Stripe::Checkout::Session).to receive(:create).with(
           hash_including(
-            payment_method_types: ["card"],
+            payment_method_types: [ "card" ],
             mode: "payment",
-            line_items: [hash_including(
+            line_items: [ hash_including(
               price_data: hash_including(
                 currency: "hkd",
                 unit_amount: 15000,
                 product_data: hash_including(name: "Used Textbook")
               ),
               quantity: 1
-            )]
+            ) ]
           )
         ).and_return(fake_session)
 

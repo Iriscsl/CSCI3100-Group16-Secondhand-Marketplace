@@ -29,11 +29,11 @@ RSpec.describe ItemDigestMailer, type: :mailer do
       let(:mail) { ItemDigestMailer.daily_digest(user) }
 
       it "sends to the correct user" do
-        expect(mail.to).to eq(["1155022222@link.cuhk.edu.hk"])
+        expect(mail.to).to eq([ "1155022222@link.cuhk.edu.hk" ])
       end
 
       it "sends from the team email" do
-        expect(mail.from).to eq(["csci3100gp16team@gmail.com"])
+        expect(mail.from).to eq([ "csci3100gp16team@gmail.com" ])
       end
 
       it "has the correct subject with today's date" do
