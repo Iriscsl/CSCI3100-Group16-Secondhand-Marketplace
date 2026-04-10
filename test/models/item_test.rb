@@ -81,6 +81,7 @@ class ItemTest < ActiveSupport::TestCase
 
   test "min_price and max_price combined narrows results" do
     results = Item.min_price(150).max_price(400)
+    assert_not_empty results, "Expected at least one item in the 150-400 range"
     results.each do |item|
       assert item.price >= 150
       assert item.price <= 400

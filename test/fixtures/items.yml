@@ -15,7 +15,7 @@
 one:
   title: MyString
   description: MyText
-  price: 1
+  price: 100
   status: 0
   community: 0
   user: one
@@ -23,7 +23,7 @@ one:
 two:
   title: MyString
   description: MyText
-  price: 1
+  price: 250
   status: 1
   community: 0
   user: one
