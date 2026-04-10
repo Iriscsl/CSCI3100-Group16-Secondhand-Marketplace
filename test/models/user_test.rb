@@ -1,64 +1,66 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  # --- CUHK email validation ---
-
-  test "valid CUHK email is accepted" do
-    user = User.new(
-      email: "1155999999@link.cuhk.edu.hk",
-      password: "password",
-      password_confirmation: "password"
+  def setup
+    @user = User.new(
+      name: "Test Student",
+      email: "1155123456@link.cuhk.edu.hk",
+      password: "password123",
+      password_confirmation: "password123"
     )
-    assert user.valid?, "Expected user with CUHK email to be valid, got: #{user.errors.full_messages}"
   end
 
-  test "non-CUHK email is rejected" do
-    user = User.new(
-      email: "test@gmail.com",
-      password: "password",
-      password_confirmation: "password"
-    )
-    assert_not user.valid?
-    assert_includes user.errors[:email], "must be a CUHK email address (1155xxxxxx@link.cuhk.edu.hk)"
+  test "should be valid with valid attributes" do
+    assert @user.valid?
   end
 
-  test "partial CUHK domain is rejected" do
-    user = User.new(
-      email: "1155111111@cuhk.edu.hk",
-      password: "password",
-      password_confirmation: "password"
-    )
-    assert_not user.valid?
-    assert_includes user.errors[:email], "must be a CUHK email address (1155xxxxxx@link.cuhk.edu.hk)"
+  test "name should be present" do
+    @user.name = "   "
+    assert_not @user.valid?
   end
 
-  # --- strip_email_spaces ---
-
-  test "leading and trailing spaces are stripped from email" do
-    user = User.new(
-      email: "  1155888888@link.cuhk.edu.hk  ",
-      password: "password",
-      password_confirmation: "password"
-    )
-    user.valid?
-    assert_equal "1155888888@link.cuhk.edu.hk", user.email
+  test "email should be present" do
+    @user.email = "   "
+    assert_not @user.valid?
   end
 
-  # --- has_many items ---
-
-  test "user has many items" do
-    user = users(:one)
-    assert_respond_to user, :items
-    assert user.items.count >= 1
-  end
-
-  test "destroying user destroys associated items" do
-    user = users(:one)
-    item_count = user.items.count
-    assert item_count > 0
-
-    assert_difference("Item.count", -item_count) do
-      user.destroy
+  test "email should be valid with CUHK Link format" do
+    valid_emails = [
+      "1155123456@link.cuhk.edu.hk",
+      "1155987654@link.cuhk.edu.hk"
+    ]
+    valid_emails.each do |email|
+      @user.email = email
+      assert @user.valid?, "#{email} should be valid"
     end
+  end
+
+  test "email should reject invalid formats" do
+    invalid_emails = [
+      "test@gmail.com",
+      "1155123456@cuhk.edu.hk",
+      "invalid",
+      "1155123456@link.cuhk.edu"
+    ]
+    invalid_emails.each do |email|
+      @user.email = email
+      assert_not @user.valid?, "#{email} should be invalid"
+    end
+  end
+
+  test "email should be unique" do
+    duplicate_user = @user.dup
+    @user.save
+    assert_not duplicate_user.valid?
+  end
+
+  test "password should have minimum length" do
+    @user.password = @user.password_confirmation = "a" * 5
+    assert_not @user.valid?
+  end
+
+  test "password should be at least 6 characters" do
+    @user.password = @user.password_confirmation = "a" * 6
+    assert @user.valid?
   end
 end

@@ -1,5 +1,6 @@
 Given("there are items in the database") do
   user = User.create!(
+    name: "username1",
     email: "1155123456@link.cuhk.edu.hk",
     password: "password123"
   )
