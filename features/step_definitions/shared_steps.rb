@@ -1,5 +1,6 @@
 Given("a confirmed user exists with email {string} and password {string}") do |email, password|
   @user = User.create!(
+    name: "Test User",
     email: email,
     password: password,
     password_confirmation: password,
@@ -23,14 +24,6 @@ Given("I am signed in as {string} with password {string}") do |email, password|
   fill_in "Email", with: email
   fill_in "Password", with: password
   click_button "Log in"
-end
-
-Then("I should see {string}") do |text|
-  expect(page).to have_content(text)
-end
-
-Then("I should not see {string}") do |text|
-  expect(page).not_to have_content(text)
 end
 
 Then("I should be redirected to the sign-in page") do

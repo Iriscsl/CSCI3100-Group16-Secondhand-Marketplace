@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe ItemDigestMailer, type: :mailer do
   let(:user) do
     u = User.new(
+      name: "Test User",
       email: "1155022222@link.cuhk.edu.hk",
       password: "password123",
       password_confirmation: "password123"

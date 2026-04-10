@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe DailyDigestJob, type: :job do
   let(:user) do
     u = User.new(
+      name: "Test User",
       email: "1155011111@link.cuhk.edu.hk",
       password: "password123",
       password_confirmation: "password123"
