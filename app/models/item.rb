@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   include PgSearch::Model
   enum :status, [ :available, :reserved, :sold ]
 
+  validates :price, numericality: { greater_than_or_equal_to: 4, message: "must be at least $4 HKD (Stripe minimum)" }
+
   enum :community, {
     chung_chi: 0,
     united: 1,

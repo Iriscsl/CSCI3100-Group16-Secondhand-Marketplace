@@ -4,6 +4,10 @@ class CheckoutsController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
 
+    if @item.price < 4
+      redirect_to @item, alert: "This item's price is below the minimum ($4 HKD) required for checkout." and return
+    end
+
     session = Stripe::Checkout::Session.create(
       payment_method_types: [ "card" ],
       line_items: [ {
