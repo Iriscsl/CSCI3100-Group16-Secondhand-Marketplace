@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe Message, type: :model do
   describe "associations" do
     it "belongs to a conversation and a sender" do
-      owner  = User.create!(email: "1155000010@link.cuhk.edu.hk", password: "password")
-      buyer  = User.create!(email: "1155000011@link.cuhk.edu.hk", password: "password")
+      owner  = User.create!(email: "1155000010@link.cuhk.edu.hk", password: "password", name: "user1", confirmed_at: Time.now)
+      buyer  = User.create!(email: "1155000011@link.cuhk.edu.hk", password: "password", name: "user2", confirmed_at: Time.now)
       item   = Item.create!(title: "Item 1", price: 10, user: owner, status: 1, community: 0)
       convo  = Conversation.create!(item: item, buyer: buyer, seller: owner)
 
@@ -17,8 +17,8 @@ RSpec.describe Message, type: :model do
 
   describe "validations" do
     it "is invalid without a body" do
-      owner  = User.create!(email: "1155000012@link.cuhk.edu.hk", password: "password")
-      buyer  = User.create!(email: "1155000013@link.cuhk.edu.hk", password: "password")
+      owner  = User.create!(email: "1155000012@link.cuhk.edu.hk", password: "password", name: "user3", confirmed_at: Time.now)
+      buyer  = User.create!(email: "1155000013@link.cuhk.edu.hk", password: "password", name: "user4", confirmed_at: Time.now)
       item   = Item.create!(title: "Item 2", price: 20, user: owner, status: 1, community: 0)
       convo  = Conversation.create!(item: item, buyer: buyer, seller: owner)
 
@@ -29,8 +29,8 @@ RSpec.describe Message, type: :model do
     end
 
     it "is valid with a body" do
-      owner  = User.create!(email: "1155000014@link.cuhk.edu.hk", password: "password")
-      buyer  = User.create!(email: "1155000015@link.cuhk.edu.hk", password: "password")
+      owner  = User.create!(email: "1155000014@link.cuhk.edu.hk", password: "password", name: "user5", confirmed_at: Time.now)
+      buyer  = User.create!(email: "1155000015@link.cuhk.edu.hk", password: "password", name: "user6", confirmed_at: Time.now)
       item   = Item.create!(title: "Item 3", price: 30, user: owner, status: 1, community: 0)
       convo  = Conversation.create!(item: item, buyer: buyer, seller: owner)
 
@@ -42,8 +42,8 @@ RSpec.describe Message, type: :model do
 
   describe "callbacks" do
     it "calls broadcast_message after create" do
-      owner  = User.create!(email: "1155000016@link.cuhk.edu.hk", password: "password")
-      buyer  = User.create!(email: "1155000017@link.cuhk.edu.hk", password: "password")
+      owner  = User.create!(email: "1155000016@link.cuhk.edu.hk", password: "password", name: "user16", confirmed_at: Time.now)
+      buyer  = User.create!(email: "1155000017@link.cuhk.edu.hk", password: "password", name: "user17", confirmed_at: Time.now)
       item   = Item.create!(title: "Item 4", price: 40, user: owner, status: 1, community: 0)
       convo  = Conversation.create!(item: item, buyer: buyer, seller: owner)
 

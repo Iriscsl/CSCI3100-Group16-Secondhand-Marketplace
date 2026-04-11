@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe Conversation, type: :model do
   describe "associations and dependent destroy" do
     it "links item/buyer/seller and destroys messages on delete" do
-      owner  = User.create!(email: "1155000000@link.cuhk.edu.hk", password: "password")
-      buyer  = User.create!(email: "1155000001@link.cuhk.edu.hk", password: "password")
+      owner  = User.create!(email: "1155000000@link.cuhk.edu.hk", password: "password", name:"owner1", confirmed_at: Time.now)
+      buyer  = User.create!(email: "1155000001@link.cuhk.edu.hk", password: "password", name:"buyer1", confirmed_at: Time.now)
       item   = Item.create!(title: "Item 1", price: 10, user: owner, status: 1, community: 0)
 
       conversation = Conversation.create!(item: item, buyer: buyer, seller: owner)
@@ -21,9 +21,9 @@ RSpec.describe Conversation, type: :model do
   end
 
   describe "seller_must_match_item_owner validation" do
-    let(:item_owner) { User.create!(email: "1155000002@link.cuhk.edu.hk", password: "password") }
-    let(:other_user) { User.create!(email: "1155000003@link.cuhk.edu.hk", password: "password") }
-    let(:buyer)      { User.create!(email: "1155000004@link.cuhk.edu.hk", password: "password") }
+    let(:item_owner) { User.create!(email: "1155000002@link.cuhk.edu.hk", password: "password", name: "owner1", confirmed_at: Time.now) }
+    let(:other_user) { User.create!(email: "1155000003@link.cuhk.edu.hk", password: "password", name: "user2", confirmed_at: Time.now) }
+    let(:buyer)      { User.create!(email: "1155000004@link.cuhk.edu.hk", password: "password", name: "user3", confirmed_at: Time.now) }
     let(:item) do
       Item.create!(
         title: "Item 1",

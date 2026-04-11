@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "Messages", type: :request do
-  let(:buyer)  { User.create!(email: "1155000200@link.cuhk.edu.hk", password: "password") }
-  let(:seller) { User.create!(email: "1155000201@link.cuhk.edu.hk", password: "password") }
+  let(:buyer)  { User.create!(email: "1155000200@link.cuhk.edu.hk", password: "password", name: "user1", confirmed_at: Time.now) }
+  let(:seller) { User.create!(email: "1155000201@link.cuhk.edu.hk", password: "password", name: "user2", confirmed_at: Time.now) }
   let(:item) do
     Item.create!(
       title: "Item 1",
@@ -48,7 +48,7 @@ RSpec.describe "Messages", type: :request do
 
     context "as a non-participant" do
       it "redirects to conversations index and does not create a message" do
-        stranger = User.create!(email: "1155000202@link.cuhk.edu.hk", password: "password")
+        stranger = User.create!(email: "1155000202@link.cuhk.edu.hk", password: "password", name: "user3", confirmed_at: Time.now)
         sign_out buyer
         sign_in stranger
 
