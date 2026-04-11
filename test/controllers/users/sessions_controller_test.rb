@@ -7,7 +7,8 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
       name: "Test User",
       email: "1155123456@link.cuhk.edu.hk",
       password: "password123",
-      password_confirmation: "password123"
+      password_confirmation: "password123",
+      confirmed_at: Time.current
     )
   end
 

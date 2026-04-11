@@ -9,6 +9,7 @@
 
 # Ignore all environment files.
 /.env*
+!/.env.example
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -33,3 +34,25 @@
 # Ignore key files for decrypting credentials and more.
 /config/*.key
 
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Node (if using yarn/npm for JS)
+/node_modules/
+/yarn-error.log
+
+# Database dumps
+*.sql
+*.dump
+
+# Byebug / Debug
+.byebug_history

@@ -44,6 +44,9 @@ gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
 group :development, :test do
+  # Load environment variables from .env files
+  gem "dotenv-rails"
+
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
@@ -55,13 +58,25 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-
   gem "rspec-rails"
   gem "cucumber-rails", require: false
   gem "database_cleaner-active_record"
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+group :development do
+  # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem "web-console"
+  # Preview emails in the browser instead of sending
+  gem "letter_opener"
+end
+
+# group :test do
+#   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+#   gem "capybara"
+#   gem "selenium-webdriver"
+# end
 
 # group :development do
 #   # Use console on exceptions pages [https://github.com/rails/web-console]
@@ -75,4 +90,6 @@ end
 # end
 
 gem "devise", "~> 5.0"
+gem "whenever", require: false
+gem "stripe"
 gem "pg_search", "~> 2.0"

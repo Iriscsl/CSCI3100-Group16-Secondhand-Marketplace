@@ -1,0 +1,11 @@
+<div style="max-width: 600px; margin: 60px auto; text-align: center; padding: 40px; border: 1px solid #d4edda; border-radius: 10px; background-color: #f0faf0;">
+  <h1 style="color: #28a745; margin-bottom: 10px;">Payment Successful!</h1>
+  <p style="font-size: 18px; color: #333;">
+    You have purchased <strong><%= @item.title %></strong> for <strong>$<%= @item.price %> HKD</strong>.
+  </p>
+  <p style="color: #666;">The item has been marked as sold. Please contact the seller to arrange pickup.</p>
+  <div style="margin-top: 30px;">
+    <%= link_to "Back to Items", items_path,
+        style: "background-color: #3498db; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 16px;" %>
+  </div>
+</div>

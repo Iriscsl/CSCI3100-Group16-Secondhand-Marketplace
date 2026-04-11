@@ -4,8 +4,10 @@ RSpec.describe Item, type: :model do
   describe "scopes" do
     let!(:user) do
       User.create!(
+        name: "Test User",
         email: "1155123456@link.cuhk.edu.hk",
-        password: "password123"
+        password: "password123",
+        confirmed_at: Time.current
       )
     end
 

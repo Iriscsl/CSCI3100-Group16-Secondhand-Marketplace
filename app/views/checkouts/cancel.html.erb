@@ -1,0 +1,11 @@
+<div style="max-width: 600px; margin: 60px auto; text-align: center; padding: 40px; border: 1px solid #f8d7da; border-radius: 10px; background-color: #fff5f5;">
+  <h1 style="color: #e74c3c; margin-bottom: 10px;">Payment Cancelled</h1>
+  <p style="font-size: 18px; color: #333;">
+    Your purchase of <strong><%= @item.title %></strong> was cancelled.
+  </p>
+  <p style="color: #666;">No charges were made. The item is still available.</p>
+  <div style="margin-top: 30px;">
+    <%= link_to "Back to Item", item_path(@item),
+        style: "background-color: #3498db; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 16px;" %>
+  </div>
+</div>
