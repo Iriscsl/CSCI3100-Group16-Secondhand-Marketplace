@@ -91,6 +91,7 @@ end
 # end
 
 gem "devise", "~> 5.0"
+gem "rails-controller-testing"
 gem "whenever", require: false
 gem "stripe"
 gem "pg_search", "~> 2.0"

@@ -23,4 +23,12 @@
   <% end %>
 <% end %>
 
+<% if user_signed_in? && current_user != @item.user %>
+  <%= button_to "Message seller",
+      conversations_path(
+        item_id: @item.id,
+        seller_id: @item.user
+      ),
+      method: :post %>
+<% end %>
 

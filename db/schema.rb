@@ -20,6 +20,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_03_093139) do
   enable_extension "pg_trgm"
   enable_extension "vault.supabase_vault"
 
+  create_table "conversations", force: :cascade do |t|
+    t.integer "buyer_id"
+    t.datetime "created_at", null: false
+    t.integer "item_id"
+    t.integer "seller_id"
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_conversations_on_buyer_id"
+    t.index ["item_id"], name: "index_conversations_on_item_id"
+    t.index ["seller_id"], name: "index_conversations_on_seller_id"
+  end
+
   create_table "items", force: :cascade do |t|
     t.integer "community"
     t.datetime "created_at", null: false
@@ -30,6 +41,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_03_093139) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.integer "conversation_id"
+    t.datetime "created_at", null: false
+    t.integer "sender_id"
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,5 +72,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_03_093139) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "conversations", "items"
+  add_foreign_key "conversations", "users", column: "buyer_id"
+  add_foreign_key "conversations", "users", column: "seller_id"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "items", "users"
 end

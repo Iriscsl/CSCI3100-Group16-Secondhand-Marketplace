@@ -3,6 +3,11 @@ Rails.application.routes.draw do
     patch :update_status, on: :member
   end
 
+  resources :conversations, only: [ :index, :show, :create ] do
+    resources :messages, only: [ :create ]
+  end
+
+
   get "home/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
