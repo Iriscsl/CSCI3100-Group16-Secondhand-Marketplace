@@ -56,3 +56,6 @@
 
 # Byebug / Debug
 .byebug_history
+
+# SimpleCov coverage reports
+/coverage
