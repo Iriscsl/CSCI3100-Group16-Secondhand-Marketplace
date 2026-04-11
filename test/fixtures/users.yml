@@ -15,16 +15,18 @@
 #   updated_at: <%= Time.now %>
 
 one: 
-  email: "1155111111@cuhk.edu.hk"
+  email: "1155111111@link.cuhk.edu.hk"
   name: "Test User One"
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: <%= Time.now %>
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
 
 two: 
-  email: "1155222222@cuhk.edu.hk"
+  email: "1155222222@link.cuhk.edu.hk"
   name: "Test User Two"
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: <%= Time.now %>
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
 

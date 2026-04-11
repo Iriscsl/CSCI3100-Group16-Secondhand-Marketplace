@@ -1,0 +1,49 @@
+<div style="max-width: 900px; margin: 0 auto; padding: 20px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+    <h1 style="margin: 0; color: #2c3e50;">Daily Digest</h1>
+    <span style="background-color: #3498db; color: white; padding: 6px 14px; border-radius: 20px; font-size: 14px;">
+      <%= @new_items.size %> new item<%= @new_items.size == 1 ? '' : 's' %> today
+    </span>
+  </div>
+
+  <p style="color: #7f8c8d; margin-bottom: 24px;">
+    New items listed in the last 24 hours &mdash; <%= Date.current.strftime('%B %d, %Y') %>
+  </p>
+
+  <% if @new_items.any? %>
+    <div style="display: grid; gap: 16px;">
+      <% @new_items.each do |item| %>
+        <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.06); transition: box-shadow 0.2s;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="flex: 1;">
+              <h3 style="margin: 0 0 8px 0;">
+                <%= link_to item.title, item_path(item), style: "color: #2c3e50; text-decoration: none;" %>
+              </h3>
+              <p style="color: #7f8c8d; margin: 0 0 12px 0; font-size: 14px;">
+                <%= truncate(item.description, length: 120) %>
+              </p>
+              <div style="display: flex; gap: 16px; font-size: 13px; color: #95a5a6;">
+                <span>🏠 <%= item.community_name %></span>
+                <span>👤 <%= item.user.name || item.user.email %></span>
+                <span>🕐 <%= time_ago_in_words(item.created_at) %> ago</span>
+              </div>
+            </div>
+            <div style="text-align: right; margin-left: 20px;">
+              <span style="font-size: 22px; font-weight: bold; color: #27ae60;">$<%= item.price %></span>
+              <br>
+              <span style="font-size: 12px; padding: 3px 8px; border-radius: 12px; background-color: <%= item.available? ? '#d4edda' : '#fff3cd' %>; color: <%= item.available? ? '#155724' : '#856404' %>;">
+                <%= item.status.capitalize %>
+              </span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div style="text-align: center; padding: 60px 20px; background: #f8f9fa; border-radius: 8px; color: #95a5a6;">
+      <p style="font-size: 48px; margin: 0;">📭</p>
+      <h3 style="color: #7f8c8d;">No new items today</h3>
+      <p>Check back tomorrow for fresh listings!</p>
+    </div>
+  <% end %>
+</div>

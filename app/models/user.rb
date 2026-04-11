@@ -2,11 +2,13 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
   belongs_to :user_community, class_name: "Community", foreign_key: "community", optional: true
   has_many :items, dependent: :destroy
   before_validation :strip_email_spaces
   validate :cuhk_email_format
+  validates :name, presence: true
+  # validates :password, length: { in: 6..128 }, if: -> { password.present? }
   private
 
   def name_required?

@@ -15,16 +15,24 @@
 one:
   title: MyString
   description: MyText
-  price: 1
-  status: 1
+  price: 100
+  status: 0
   community: 0
   user: one
 
 two:
   title: MyString
   description: MyText
-  price: 1
+  price: 250
   status: 1
   community: 0
   user: one
+
+three:
+  title: "Test Item Three"
+  description: "Third test item"
+  price: 500
+  status: 2
+  community: 4
+  user: two
   
