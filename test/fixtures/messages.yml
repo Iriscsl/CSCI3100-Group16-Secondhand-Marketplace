@@ -1,0 +1,22 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  conversation: one
+  sender: one
+  body: "Hello from buyer"
+  created_at: <%= 1.hour.ago %>
+  updated_at: <%= 1.hour.ago %>
+
+two:
+  conversation_id: one
+  sender: two
+  body: "Hello from seller"
+  created_at: <%= 50.minutes.ago %>
+  updated_at: <%= 50.minutes.ago %>
+
+three:
+  conversation_id: two
+  sender: two
+  body: "Another conversation"
+  created_at: <%= 30.minutes.ago %>
+  updated_at: <%= 30.minutes.ago %>

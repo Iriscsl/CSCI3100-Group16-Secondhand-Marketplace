@@ -34,6 +34,10 @@
               <%= link_to "Daily Digest", daily_digest_path, style: "color: white; text-decoration: none;" %>
               <%#= link_to "My Listings", my_items_path, style: "color: white; text-decoration: none;" %>
             <% end %>
+             <% if user_signed_in? %>
+              <%= link_to "Chats", conversations_path, style: "color: white; text-decoration: none;" %>
+              <%#= link_to "My Listings", my_items_path, style: "color: white; text-decoration: none;" %>
+            <% end %>
           </div>
           
           <div style="display: flex; gap: 15px; align-items: center;">
@@ -66,9 +70,7 @@
         </div>
       <% end %>
     </div>
-    <div data-turbo="false">
   <%= yield %>
-</div>
 
   </body>
 

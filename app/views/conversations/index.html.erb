@@ -1,0 +1,22 @@
+<h1>Conversations</h1>
+
+<h2>Your chats</h2>
+
+<% if @conversations.any? %>
+  <ul>
+    <% @conversations.each do |conversation| %>
+      <% other_user =
+           conversation.buyer == current_user ?
+             conversation.seller :
+             conversation.buyer %>
+
+      <li>
+        <%= link_to conversation.item.title, conversation_path(conversation) %>
+        with <%= other_user.name %>
+        (<%= conversation.messages.count %> messages)
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no conversations yet.</p>
+<% end %>

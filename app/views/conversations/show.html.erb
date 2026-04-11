@@ -1,0 +1,19 @@
+<h1>Conversations</h1>
+
+<p>
+  Item:
+  <%= @conversation.item.title if @conversation.item.present? %>
+</p>
+
+<%= turbo_stream_from @conversation %>
+<div id="messages">
+  <%= render @messages %>
+</div>
+
+<hr>
+
+<h2>Send a message</h2>
+
+<div id="new_message_form">
+  <%= render "messages/form", conversation: @conversation, message: @message %>
+</div>
