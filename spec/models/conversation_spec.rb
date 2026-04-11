@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe Conversation, type: :model do
   describe "associations and dependent destroy" do
     it "links item/buyer/seller and destroys messages on delete" do
-      owner  = User.create!(email: "1155000000@link.cuhk.edu.hk", password: "password", name:"owner1", confirmed_at: Time.now)
-      buyer  = User.create!(email: "1155000001@link.cuhk.edu.hk", password: "password", name:"buyer1", confirmed_at: Time.now)
+      owner  = User.create!(email: "1155000000@link.cuhk.edu.hk", password: "password", name: "owner1", confirmed_at: Time.now)
+      buyer  = User.create!(email: "1155000001@link.cuhk.edu.hk", password: "password", name: "buyer1", confirmed_at: Time.now)
       item   = Item.create!(title: "Item 1", price: 10, user: owner, status: 1, community: 0)
 
       conversation = Conversation.create!(item: item, buyer: buyer, seller: owner)

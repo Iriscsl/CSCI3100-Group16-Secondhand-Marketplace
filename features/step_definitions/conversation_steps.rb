@@ -1,9 +1,9 @@
 # 1. Setup the items and seller
 Given("an item {string} exists") do |item_name|
   seller = User.create!(
-    email: "1155212109@link.cuhk.edu.hk", 
-    name: "sellerr", 
-    password: "password", 
+    email: "1155212109@link.cuhk.edu.hk",
+    name: "sellerr",
+    password: "password",
     confirmed_at: Time.now # <--- FIXED: Devise requires this now
   )
   @item = Item.create!(title: item_name, price: 10, user: seller, status: 1, community: 0)
@@ -12,9 +12,9 @@ end
 # 2. Buyer login
 Given('I am logged in as a buyer') do
   @buyer = User.create!(
-    email: "1155212108@link.cuhk.edu.hk", 
-    name: "buyerr", 
-    password: "password", 
+    email: "1155212108@link.cuhk.edu.hk",
+    name: "buyerr",
+    password: "password",
     confirmed_at: Time.now # <--- FIXED
   )
   login_as(@buyer, scope: :user)
@@ -39,9 +39,9 @@ end
 # 6. Seller login
 Given("I am logged in as a seller") do
   @seller = User.create!(
-    email: "1155000000@link.cuhk.edu.hk", 
-    password: "password", 
-    name: "sellller", 
+    email: "1155000000@link.cuhk.edu.hk",
+    password: "password",
+    name: "sellller",
     confirmed_at: Time.now # <--- FIXED
   )
   login_as(@seller, scope: :user)
