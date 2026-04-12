@@ -1,11 +1,10 @@
 <% content_for :title, "New item" %>
 
-<h1>New item</h1>
+<div class="card" style="max-width: 600px;">
+  <h1>New Item</h1>
+  <%= render "form", item: @item %>
+</div>
 
-<%= render "form", item: @item %>
-
-<br>
-
-<div>
-  <%= link_to "Back to items", items_path %>
+<div class="mt-2">
+  <%= link_to "Back to Items", items_path, class: "btn btn-outline" %>
 </div>

@@ -49,13 +49,13 @@ end
 
 # 7. Setup seller items
 Given("I have listed an item {string}") do |title|
-  @item = Item.create!(title: title, price: 100, user: @seller)
+  @item = Item.create!(title: title, price: 100, user: @seller, status: :available, community: :chung_chi)
 end
 
 # 8. Verify missing button
-Then('I should not see the "Message seller" button') do
-  expect(page).not_to have_button('Message seller')
-  expect(page).not_to have_link('Message seller')
+Then('I should not see the "Message Seller" button') do
+  expect(page).not_to have_button('Message Seller')
+  expect(page).not_to have_link('Message Seller')
 end
 
 # 9. Setup conversation

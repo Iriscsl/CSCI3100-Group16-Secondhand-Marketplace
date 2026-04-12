@@ -1,9 +1,8 @@
 <%= form_with(model: item) do |form| %>
   <% if item.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
-
-      <ul>
+    <div style="background: #f8d7da; color: #721c24; padding: 14px 18px; border-radius: 8px; margin-bottom: 20px;">
+      <strong><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</strong>
+      <ul style="margin: 8px 0 0; padding-left: 20px;">
         <% item.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,32 +10,32 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
+  <div class="field">
+    <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
+  <div class="field">
+    <%= form.label :description %>
     <%= form.textarea :description %>
   </div>
 
-  <div>
-    <%= form.label :price, style: "display: block" %>
+  <div class="field">
+    <%= form.label :price %>
     <%= form.number_field :price %>
   </div>
 
-  <div>
-  <%= form.label :status, style: "display: block" %>
-  <%= form.select :status, Item.statuses.keys.map { |s| [s.to_s.humanize, s] } %>
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, Item.statuses.keys.map { |s| [s.to_s.humanize, s] } %>
   </div>
 
-  <div>
-  <%= form.label :community, style: "display: block" %>
-  <%= form.select :community, Item.communities.map { |key, value| [Item::COMMUNITY_NAMES[key.to_sym], value] } %>
+  <div class="field">
+    <%= form.label :community %>
+    <%= form.select :community, Item.communities.map { |key, value| [Item::COMMUNITY_NAMES[key.to_sym], value] } %>
   </div>
 
-  <div>
+  <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>

@@ -1,58 +1,66 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Items" %>
 
-<h1>Items</h1>
+<div class="flex-between mb-3">
+  <h1>Items</h1>
+  <%= link_to "New Item", new_item_path, class: "btn" %>
+</div>
 
-<%= form_with url: items_path, method: :get, local: true do %>
-  <div style="margin-bottom: 16px;">
-    <strong>Search</strong><br>
-    <%= text_field_tag :query, params[:query], placeholder: "Search items..." %>
-  </div>
-  
-  <div>
-    <strong>Filter by status:</strong><br>
+<div class="filter-panel">
+  <%= form_with url: items_path, method: :get, local: true do %>
+    <div class="filter-row">
+      <div class="filter-group" style="flex: 2 1 260px;">
+        <label for="query">Search</label>
+        <%= text_field_tag :query, params[:query], placeholder: "Search items...", id: "query" %>
+      </div>
 
-    <% ["available", "reserved", "sold"].each do |s| %>
-      <%= check_box_tag "status[]", s, params[:status].nil? || params[:status].include?(s) %>
-      <%= label_tag s, s.capitalize %><br>
-    <% end %>
-  </div>
+      <div class="filter-group">
+        <label>Community</label>
+        <%= select_tag :community,
+            options_for_select(
+              [["All", ""], *Item::COMMUNITY_NAMES.map { |k, v| [v, k] }],
+              params[:community]
+            ) %>
+      </div>
 
-  <div>
-    <strong><%= label_tag :community, "Filter by community" %></strong>
-    <%= select_tag :community,
-        options_for_select(
-          [["All", ""], *Item::COMMUNITY_NAMES.map { |k, v| [v, k] }],
-          params[:community]
-        ) %>
-  </div>
+      <div class="filter-group">
+        <label>Min price</label>
+        <%= number_field_tag :min_price, params[:min_price].presence, placeholder: "$0" %>
+      </div>
 
-  <div>
-    <strong>Filter by price range:</strong><br>
-    <%= label_tag :min_price, "Min price" %>
-    <%= number_field_tag :min_price, params[:min_price].presence %>
-  </div>
+      <div class="filter-group">
+        <label>Max price</label>
+        <%= number_field_tag :max_price, params[:max_price].presence, placeholder: "No limit" %>
+      </div>
+    </div>
 
-  <div>
-    <%= label_tag :max_price, "Max price" %>
-    <%= number_field_tag :max_price, params[:max_price].presence %>
-  </div>
+    <div class="checkbox-group mt-2">
+      <strong>Status:</strong>
+      <% ["available", "reserved", "sold"].each do |s| %>
+        <label>
+          <%= check_box_tag "status[]", s, params[:status].nil? || params[:status].include?(s) %>
+          <%= s.capitalize %>
+        </label>
+      <% end %>
+    </div>
 
-  <div style="margin-top: 12px;">
-    <%= submit_tag "Apply Search & Filters" %>
-  </div>
-<% end %>
-
-<hr>
-
-<div id="items">
-  <% @items.each do |item| %>
-    <%= render item %>
-    <p>
-      <%= link_to "Show this item", item %>
-    </p>
+    <div class="mt-2">
+      <%= submit_tag "Apply Filters" %>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New item", new_item_path %>
+<div id="items" class="items-grid">
+  <% @items.each do |item| %>
+    <div class="card item-card">
+      <div class="flex-between">
+        <h3 class="item-title"><%= link_to item.title, item %></h3>
+        <span class="item-price">$<%= item.price %></span>
+      </div>
+      <p class="item-desc"><%= item.description %></p>
+      <div class="item-meta">
+        <span class="badge badge-<%= item.status %>"><%= item.status.capitalize %></span>
+        <span><%= item.community_name %></span>
+      </div>
+    </div>
+  <% end %>
+</div>

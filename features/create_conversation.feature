@@ -7,11 +7,11 @@ Scenario:  Buyer starts a conversation from an item page
   Given an item "item1" exists  
   And I am logged in as a buyer 
   And I am on the page for item "item1" 
-  When I click the "Message seller" button
+  When I click the "Message Seller" button
   Then I should see a conversation for "item1" 
 
 Scenario: 
   Given I am logged in as a seller 
   And I have listed an item "my item" 
   And I am on the page for item "my item" 
-  Then I should not see the "Message seller" button
+  Then I should not see the "Message Seller" button

@@ -35,6 +35,22 @@ RSpec.describe "Checkouts", type: :request do
     context "when signed in" do
       before { sign_in user }
 
+      it "redirects with alert when item price is below minimum" do
+        cheap_item = Item.new(
+          title: "Cheap Item",
+          description: "Too cheap",
+          price: 3,
+          status: :available,
+          community: :new_asia,
+          user: user
+        )
+        cheap_item.save(validate: false)
+
+        post checkout_path, params: { item_id: cheap_item.id }
+        expect(response).to redirect_to(item_path(cheap_item))
+        expect(flash[:alert]).to match(/below the minimum/)
+      end
+
       it "creates a Stripe Checkout Session and redirects" do
         fake_session = double("Stripe::Checkout::Session", url: "https://checkout.stripe.com/test")
         allow(Stripe::Checkout::Session).to receive(:create).and_return(fake_session)

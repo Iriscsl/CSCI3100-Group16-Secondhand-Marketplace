@@ -52,6 +52,12 @@ RSpec.describe ItemDigestMailer, type: :mailer do
     end
 
     context "when there are no new items" do
+      before do
+        Message.delete_all
+        Conversation.delete_all
+        Item.delete_all
+      end
+
       it "returns nil (no email sent)" do
         mail = ItemDigestMailer.daily_digest(user)
         expect(mail.message).to be_a(ActionMailer::Base::NullMail)

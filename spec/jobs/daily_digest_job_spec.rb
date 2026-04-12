@@ -16,6 +16,9 @@ RSpec.describe DailyDigestJob, type: :job do
   describe "#perform" do
     context "when there are new items in the last 24 hours" do
       before do
+        Message.delete_all
+        Conversation.delete_all
+        Item.delete_all
         Item.create!(
           title: "Fresh Item",
           description: "Just listed",
@@ -29,9 +32,11 @@ RSpec.describe DailyDigestJob, type: :job do
 
       it "sends a digest email to each user" do
         mail_double = double("mail", deliver_now: true)
-        expect(ItemDigestMailer).to receive(:daily_digest).with(user).and_return(mail_double)
+        allow(ItemDigestMailer).to receive(:daily_digest).and_return(mail_double)
 
         DailyDigestJob.perform_now
+
+        expect(ItemDigestMailer).to have_received(:daily_digest).with(user)
       end
 
       it "logs the send count" do
@@ -45,6 +50,12 @@ RSpec.describe DailyDigestJob, type: :job do
     end
 
     context "when there are no new items" do
+      before do
+        Message.delete_all
+        Conversation.delete_all
+        Item.delete_all
+      end
+
       it "does not send any emails" do
         expect(ItemDigestMailer).not_to receive(:daily_digest)
 
@@ -54,6 +65,9 @@ RSpec.describe DailyDigestJob, type: :job do
 
     context "when items are older than 24 hours" do
       before do
+        Message.delete_all
+        Conversation.delete_all
+        Item.delete_all
         Item.create!(
           title: "Old Item",
           description: "Listed long ago",
