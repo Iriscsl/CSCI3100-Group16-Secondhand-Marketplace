@@ -10,7 +10,6 @@ CUHK Secondhand Marketplace — a Rails 8 web app for buying and selling second-
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Configuration](#configuration)
-  - [Database Setup](#database-setup)
   - [Running the App](#running-the-app)
 - [How to Run Tests](#how-to-run-tests)
 - [Implemented Features](#implemented-features)
@@ -58,19 +57,6 @@ bundle install
 4. Set **Stripe API keys** (optional — required for payment checkout):
    - `STRIPE_SECRET_KEY`
    - `STRIPE_PUBLISHABLE_KEY`
-
-### Database Setup
-
-```bash
-bin/rails db:migrate db:seed
-```
-
-`db:seed` creates two pre-confirmed users and sample items:
-
-| Email | Password | Name |
-|---|---|---|
-| `1155000001@link.cuhk.edu.hk` | `password123` | Alice Chan |
-| `1155000002@link.cuhk.edu.hk` | `password123` | Bob Wong |
 
 ### Running the App
 
