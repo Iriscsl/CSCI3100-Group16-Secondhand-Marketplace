@@ -1,7 +1,13 @@
-<h1>Welcome to Second-hand Marketplace</h1>
-<p>A centralized trading platform for CUHK students</p>
+<div class="hero">
+  <h1>Welcome to Second-hand Marketplace</h1>
+  <p>A centralized trading platform for CUHK students</p>
 
-<% if user_signed_in? %>
-  <p>Hello, <%= current_user.name || current_user.email %>!</p>
-
-<% end %>
+  <% if user_signed_in? %>
+    <p class="hero-greeting">Hello, <strong><%= current_user.name || current_user.email %></strong>!</p>
+    <%= link_to "Browse Items", items_path, class: "btn", style: "margin-right: 8px;" %>
+    <%= link_to "Daily Digest", daily_digest_path, class: "btn btn-outline" %>
+  <% else %>
+    <%= link_to "Get Started", new_user_registration_path, class: "btn", style: "margin-right: 8px;" %>
+    <%= link_to "Log In", new_user_session_path, class: "btn btn-outline" %>
+  <% end %>
+</div>

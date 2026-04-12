@@ -1,19 +1,21 @@
-<h1>Conversations</h1>
-
-<p>
-  Item:
-  <%= @conversation.item.title if @conversation.item.present? %>
-</p>
+<div class="flex-between mb-3">
+  <div>
+    <h1>Conversation</h1>
+    <% if @conversation.item.present? %>
+      <p class="text-muted">Re: <%= link_to @conversation.item.title, @conversation.item %></p>
+    <% end %>
+  </div>
+  <%= link_to "All Chats", conversations_path, class: "btn btn-outline" %>
+</div>
 
 <%= turbo_stream_from @conversation %>
-<div id="messages">
+<div id="messages" class="messages-container mb-3">
   <%= render @messages %>
 </div>
 
-<hr>
-
-<h2>Send a message</h2>
-
-<div id="new_message_form">
-  <%= render "messages/form", conversation: @conversation, message: @message %>
+<div class="card">
+  <h2>Send a message</h2>
+  <div id="new_message_form">
+    <%= render "messages/form", conversation: @conversation, message: @message %>
+  </div>
 </div>

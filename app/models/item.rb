@@ -69,7 +69,8 @@ class Item < ApplicationRecord
     against: [ :title, :description ],
     using: {
       trigram: {
-        threshold: 0.2
+        threshold: 0.2,
+        word_similarity: true
       }
     }
 end

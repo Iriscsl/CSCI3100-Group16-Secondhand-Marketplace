@@ -1,9 +1,7 @@
-<h1>Conversations</h1>
-
-<h2>Your chats</h2>
+<h1>Your Chats</h1>
 
 <% if @conversations.any? %>
-  <ul>
+  <ul class="conversation-list">
     <% @conversations.each do |conversation| %>
       <% other_user =
            conversation.buyer == current_user ?
@@ -11,12 +9,17 @@
              conversation.buyer %>
 
       <li>
-        <%= link_to conversation.item.title, conversation_path(conversation) %>
-        with <%= other_user.name %>
-        (<%= conversation.messages.count %> messages)
+        <div>
+          <%= link_to conversation.item.title, conversation_path(conversation) %>
+          <span class="text-muted"> with <%= other_user.name %></span>
+        </div>
+        <span class="conversation-count"><%= conversation.messages.count %> messages</span>
       </li>
     <% end %>
   </ul>
 <% else %>
-  <p>You have no conversations yet.</p>
+  <div class="card text-center" style="padding: 40px;">
+    <p class="text-muted">You have no conversations yet.</p>
+    <%= link_to "Browse Items", items_path, class: "btn" %>
+  </div>
 <% end %>

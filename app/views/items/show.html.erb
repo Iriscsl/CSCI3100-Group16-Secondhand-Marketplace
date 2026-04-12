@@ -1,35 +1,54 @@
-<p style="color: green"><%= notice %></p>
+<div class="card" style="max-width: 720px;">
+  <div class="detail-header">
+    <div>
+      <h1><%= @item.title %></h1>
+      <span class="badge badge-<%= @item.status %>"><%= @item.status.capitalize %></span>
+    </div>
+    <span class="item-price" style="font-size: 1.6rem;">$<%= @item.price %> <small class="text-muted" style="font-size: 14px;">HKD</small></span>
+  </div>
 
-<%= render @item %>
+  <div class="detail-field">
+    <strong>Description</strong>
+    <span><%= @item.description %></span>
+  </div>
 
-<div>
-  <%= link_to "Edit this item", edit_item_path(@item) %> |
-  <%= link_to "Back to items", items_path %>
+  <div class="detail-field">
+    <strong>Community</strong>
+    <span><%= @item.community_name %></span>
+  </div>
 
-  <%= button_to "Destroy this item", @item, method: :delete %>
+  <div class="detail-actions">
+    <%= button_to "Delete", @item, method: :delete, class: "btn btn-danger" %>
+
+    <% if @item.available? && user_signed_in? && @item.user != current_user %>
+      <%= button_to "Buy Now — $#{@item.price} HKD", checkout_path(item_id: @item.id),
+          method: :post,
+          data: { turbo: false },
+          class: "btn",
+          style: "background-color: #6772e5;" %>
+    <% end %>
+
+    <% if user_signed_in? && @item.user == current_user %>
+      <% if @item.available? %>
+        <%= button_to "Mark as Reserved", update_status_item_path(@item, status: :reserved), method: :patch, class: "btn btn-warning" %>
+      <% elsif @item.reserved? %>
+        <%= button_to "Mark as Sold", update_status_item_path(@item, status: :sold), method: :patch, class: "btn btn-success" %>
+      <% end %>
+    <% end %>
+
+    <% if user_signed_in? && current_user != @item.user %>
+      <%= button_to "Message Seller",
+          conversations_path(
+            item_id: @item.id,
+            seller_id: @item.user
+          ),
+          method: :post, class: "btn" %>
+    <% end %>
+  </div>
 </div>
 
-<% if @item.available? && user_signed_in? && @item.user != current_user %>
-  <%= button_to "Buy Now — $#{ @item.price } HKD", checkout_path(item_id: @item.id),
-      method: :post,
-      data: { turbo: false },
-      style: "background-color: #6772e5; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 10px;" %>
-<% end %>
-
-<% if user_signed_in? && @item.user == current_user %>
-  <% if @item.available? %>
-    <%= button_to "Mark as Reserved", update_status_item_path(@item, status: :reserved), method: :patch, class: "btn btn-warning" %>
-  <% elsif @item.reserved? %>
-    <%= button_to "Mark as Sold", update_status_item_path(@item, status: :sold), method: :patch, class: "btn btn-success" %>
-  <% end %>
-<% end %>
-
-<% if user_signed_in? && current_user != @item.user %>
-  <%= button_to "Message seller",
-      conversations_path(
-        item_id: @item.id,
-        seller_id: @item.user
-      ),
-      method: :post %>
-<% end %>
+<div class="detail-actions mt-2">
+  <%= link_to "Back to Items", items_path, class: "btn btn-outline" %>
+  <%= link_to "Edit", edit_item_path(@item), class: "btn btn-outline" %>
+</div>
 
