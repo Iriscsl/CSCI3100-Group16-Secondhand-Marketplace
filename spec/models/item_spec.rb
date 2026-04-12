@@ -33,7 +33,7 @@ RSpec.describe Item, type: :model do
       )
     end
 
-    
+
     it "filters by status" do
       result = Item.with_statuses([ "available" ])
       expect(result).to include(item1)
@@ -102,5 +102,4 @@ RSpec.describe Item, type: :model do
       expect(item).to be_valid
     end
   end
-
 end
