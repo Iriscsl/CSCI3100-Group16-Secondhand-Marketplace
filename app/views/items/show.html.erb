@@ -12,6 +12,7 @@
 <% if @item.available? && user_signed_in? && @item.user != current_user %>
   <%= button_to "Buy Now — $#{ @item.price } HKD", checkout_path(item_id: @item.id),
       method: :post,
+      data: { turbo: false },
       style: "background-color: #6772e5; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 10px;" %>
 <% end %>
 
