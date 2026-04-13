@@ -8,7 +8,7 @@ class Message < ApplicationRecord
   private
 
   def broadcast_message
-    broadcast_append_to(
+    broadcast_append_later_to(
       "conversation_#{conversation.id}",
       target: "messages",
       partial: "messages/message",
