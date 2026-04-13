@@ -26,8 +26,14 @@ Rails.application.routes.draw do
   get "digest", to: "digests#show", as: :daily_digest
 
   devise_for :users, controllers: {
-    registrations: "users/registrations"
+    registrations: "users/registrations",
+    confirmations: "users/confirmations"
   }
+
+  # Custom POST route for the confirmation button (not auto-confirmed on GET)
+  devise_scope :user do
+    post "users/confirm_account", to: "users/confirmations#confirm", as: :confirm_user
+  end
   # Defines the root path route ("/")
   root "home#index"
   # devise_for :users
