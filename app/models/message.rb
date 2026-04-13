@@ -9,7 +9,7 @@ class Message < ApplicationRecord
 
   def broadcast_message
     broadcast_append_to(
-      conversation,
+      "conversation_#{conversation.id}",
       target: "messages",
       partial: "messages/message",
       locals: { message: self }
