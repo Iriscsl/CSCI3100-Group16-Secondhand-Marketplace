@@ -1,0 +1,5 @@
+class AddUnituqeIndexOnMessagesId < ActiveRecord::Migration[8.1]
+  def change
+    add_index :messages, :id, unique: true, name: "index_messages_on_id", if_not_exists: true
+  end
+end
