@@ -79,7 +79,7 @@ RSpec.describe Item, type: :model do
   end
 
   describe "status transitions" do
-    let(:user) { User.create!(email: "1155123456@link.cuhk.edu.hk", password: "password123") }
+    let(:user) { User.create!(email: "1155123456@link.cuhk.edu.hk", password: "password123", name: "Test User") }
     let(:item) { Item.create!(title: "Test", price: 10, status: :available, community: 0, user: user) }
 
     it "transitions from available to reserved" do
@@ -95,7 +95,7 @@ RSpec.describe Item, type: :model do
   end
 
   describe "community enum" do
-    let(:user) { User.create!(email: "1155123456@link.cuhk.edu.hk", password: "password123") }
+    let(:user) { User.create!(email: "1155123456@link.cuhk.edu.hk", password: "password123", name: "Test User") }
 
     it "accepts valid community values" do
       item = Item.new(community: :new_asia, user: user, title: "Book", price: 10)
