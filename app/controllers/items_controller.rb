@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: %i[ show edit update destroy update_status ]
+  before_action :authorize_owner!, only: [ :edit, :update, :destroy, :update_status ]
 
   # GET /items or /items.json
   def index
@@ -69,7 +70,6 @@ class ItemsController < ApplicationController
   end
 
   def update_status
-    @item = Item.find(params[:id])
     new_status = params[:status]
     if @item.update(status: new_status)
       redirect_to @item, notice: "Status updated to #{new_status}."
@@ -82,6 +82,11 @@ class ItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find(params.expect(:id))
+    end
+
+    def authorize_owner!
+      return if @item.user == current_user
+      redirect_to items_path, alert: "You are not allowed to modify this item."
     end
 
     def item_params
