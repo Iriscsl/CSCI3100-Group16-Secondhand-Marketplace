@@ -6,5 +6,4 @@ class CreateSolidCableMessages < ActiveRecord::Migration[8.1]
   def down
     drop_table :solid_cable_messages
   end
-
 end
