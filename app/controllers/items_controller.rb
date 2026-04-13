@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: %i[ show edit update destroy update_status ]
-  before_action :authorize_owner!, only: [:edit, :update, :destroy, :update_status]
+  before_action :authorize_owner!, only: [ :edit, :update, :destroy, :update_status ]
 
   # GET /items or /items.json
   def index
