@@ -7,6 +7,6 @@
 set :output, "log/cron.log"
 set :environment, "production"
 
-every 1.day, at: "8:00 am" do
+every 1.day, at: "11:00 am" do
   rake "digest:send"
 end
