@@ -98,11 +98,11 @@ SimpleCov is configured to generate a coverage report. After running the test su
 
 | Feature Name | Primary Developer | Secondary Developer | Notes |
 |---|---|---|---|
-|   |   |   |   |
-|   |   |   |   |
-|   |   |   |   |
-|   |   |   |   |
-|   |   |   |   |
+| User Authentication, multi-tenant structure | @shanli030 |  | Sign up, login, logout with Devise; CUHK Link email validation (`@link.cuhk.edu.hk`) |
+| Item CRUD, lifestyle UI | @Iriscsl |   | listings, Available/Reserved/Sold |
+| Search, filters| @sheenachann|   | Fuzzy search: Autocomplete showing suggestions as user type |
+| Real-time chat | @leungvanice |   | Web-socket based messaging between buyer and seller |
+|Payments, background jobs, email| @dizzyryan |   | Daily digest on new items in user’s community |
 
 ---
 
