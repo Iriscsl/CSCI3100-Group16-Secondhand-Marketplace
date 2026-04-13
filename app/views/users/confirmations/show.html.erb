@@ -1,0 +1,15 @@
+<div class="auth-wrapper">
+  <h2>Confirm your email</h2>
+  <p>Click the button below to confirm your account.</p>
+
+  <%= form_tag(confirm_user_path, method: :post) do %>
+    <%= hidden_field_tag :confirmation_token, @confirmation_token %>
+    <div class="actions">
+      <%= submit_tag "Confirm my account", style: "background-color: #27ae60; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%;" %>
+    </div>
+  <% end %>
+
+  <div class="auth-links" style="margin-top: 15px;">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
