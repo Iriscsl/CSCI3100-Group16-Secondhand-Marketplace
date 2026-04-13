@@ -39,7 +39,7 @@ Feature: Manage Items
   Scenario: Delete an item
     Given I have an item titled "Unwanted Item"
     When I go to that item's page
-    And I click "Destroy this item"
+    And I click "Delete"
     Then I should see "Item was successfully destroyed"
     And I should not see "Unwanted Item"
 
