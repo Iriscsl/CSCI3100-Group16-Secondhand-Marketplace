@@ -18,7 +18,9 @@
   </div>
 
   <div class="detail-actions">
-    <%= button_to "Delete", @item, method: :delete, class: "btn btn-danger" %>
+    <% if user_signed_in? && @item.user == current_user %>
+      <%= button_to "Delete", @item, method: :delete, class: "btn btn-danger" %>
+    <% end %>
 
     <% if @item.available? && user_signed_in? && @item.user != current_user %>
       <%= button_to "Buy Now — $#{@item.price} HKD", checkout_path(item_id: @item.id),
@@ -49,6 +51,7 @@
 
 <div class="detail-actions mt-2">
   <%= link_to "Back to Items", items_path, class: "btn btn-outline" %>
-  <%= link_to "Edit", edit_item_path(@item), class: "btn btn-outline" %>
+  <% if user_signed_in? && @item.user == current_user %>
+    <%= link_to "Edit", edit_item_path(@item), class: "btn btn-outline" %>
+  <% end %>
 </div>
-

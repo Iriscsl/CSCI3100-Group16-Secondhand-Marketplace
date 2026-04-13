@@ -54,7 +54,9 @@ end
 Given("I am logged in as a CUHK user") do
   @user = User.create!(
     email: "1155123456@link.cuhk.edu.hk",
-    password: "password123"
+    password: "password123",
+    name: "Test User",
+    confirmed_at: Time.now
   )
   login_as(@user, scope: :user)
 end
@@ -72,7 +74,9 @@ end
 Given("there is an item titled {string} posted by another user") do |title|
   other_user = User.create!(
     email: "1155777777@link.cuhk.edu.hk",
-    password: "password123"
+    password: "password123",
+    name: "Other User",
+    confirmed_at: Time.now
   )
   Item.create!(
     title: title,
@@ -139,5 +143,5 @@ When("I click {string}") do |button|
 end
 
 Then("I should see the price") do
-  expect(page).to have_text(/Price:?\s*\d+/)
+  expect(page).to have_text(/\$\d+/)
 end
