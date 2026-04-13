@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_03_093139) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_13_104105) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "extensions.pg_stat_statements"
   enable_extension "extensions.pgcrypto"
@@ -50,6 +50,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_03_093139) do
     t.integer "sender_id"
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["id"], name: "index_messages_on_id", unique: true
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
@@ -75,7 +76,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_03_093139) do
   add_foreign_key "conversations", "items"
   add_foreign_key "conversations", "users", column: "buyer_id"
   add_foreign_key "conversations", "users", column: "seller_id"
+  add_foreign_key "items", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users", column: "sender_id"
-  add_foreign_key "items", "users"
 end
