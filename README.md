@@ -111,4 +111,4 @@ SimpleCov is configured to generate a coverage report. After running the test su
 <!-- Replace the path below with the actual screenshot once generated -->
 ![SimpleCov Report](docs/simplecov.png)
 
-> **To generate:** run the test suite (`bin/rails test`, `bundle exec rspec`, or `bundle exec cucumber`), then take a screenshot of `coverage/index.html` and save it as `docs/simplecov.png`.
+> **To generate:** run all three test suites (`bundle exec rspec`, `bin/rails test`, and `bundle exec cucumber`) so that SimpleCov merges their coverage, then open `coverage/index.html` and save a screenshot as `docs/simplecov.png`.
