@@ -98,13 +98,24 @@ SimpleCov is configured to generate a coverage report. After running the test su
 
 | Feature Name | Primary Developer | Secondary Developer | Notes |
 |---|---|---|---|
-| User Authentication, multi-tenant structure | @shanli030 |  | Sign up, login, logout with Devise; CUHK Link email validation (`@link.cuhk.edu.hk`) |
+| User Authentication, CUHK-only access | @shanli030 |  | Sign up, login, logout with Devise; restricted to CUHK email (`@link.cuhk.edu.hk`), college-aware browsing instead of strict multi-tenant isolation |
 | Item CRUD, lifestyle UI | @Iriscsl |   | listings, Available/Reserved/Sold |
 | Search, filters| @sheenachann|   | Fuzzy search: Autocomplete showing suggestions as user type |
 | Real-time chat | @leungvanice |   | Web-socket based messaging between buyer and seller |
 |Payments, background jobs, email| @dizzyryan |   | Daily digest on new items in user’s community |
 
 ---
+
+### Design Note: From Multi‑Tenant to College‑Aware
+
+In the original proposal we planned a strict multi‑tenant design where each CUHK college would be fully isolated.  
+During implementation we decided to relax this constraint to give users more flexibility:
+
+- The app is still **restricted to CUHK members only** via CUHK email sign‑up.
+- Users can **browse and trade across all colleges**, which better matches real buying/selling behavior.
+- The item list page includes **filters by college**, so users who prefer to see items from a specific college can still do so.
+
+This “college‑aware, CUHK‑only” approach keeps the spirit of the original idea (college context) while avoiding the usability and complexity issues of hard multi‑tenant isolation.
 
 ## SimpleCov Report
 
